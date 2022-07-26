@@ -8,7 +8,7 @@ def save(user):
     values = [user.first_name, user.last_name]
     results = run_sql (sql, values)
     id = results[0] ['id']
-    user.it = id
+    user.id = id
     
 def delete_all():
     sql = "DELETE FROM users"
@@ -18,11 +18,20 @@ def delete_all():
 def select_all():
     sql = "SELCET * FROM users"
     results = run_sql(sql)
-    
     users = []
-    
     for row in results:
         user = User(row['first_name'], row['last_name'], row['id'])
         users.append(user)
-        
     return users
+
+
+
+def select(id):
+    user = None
+    sql = "SELECT * FROM users WHERE id = %s"
+    values = [id]
+    results = run_sql(sql, values)
+    if len(results) > 0:
+      result = results[0]
+      user = User(result['first_name'], result['last_name'], result['id'] )
+    return user
