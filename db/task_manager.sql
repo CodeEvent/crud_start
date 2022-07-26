@@ -7,9 +7,7 @@ CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   first_name VARCHAR,
   last_name  VARCHAR
-
-
-)
+);
 
 
 CREATE TABLE tasks (
@@ -17,9 +15,8 @@ CREATE TABLE tasks (
   description VARCHAR(255),
   -- assignee VARCHAR(255),
   duration INT,
-  completed BOOLEAN DEFAULT FALSE
-  user_id IN REFERENCES users(id)
-  
+  completed BOOLEAN DEFAULT FALSE,
+  user_id INT REFERENCES users(id)
 );
 
 
